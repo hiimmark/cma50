@@ -1,7 +1,7 @@
 # Mark Ma
 # Ghidorah 
 # SoftDev
-# Python dictionary and random selection. Select a random person from the dictionary.
+# K04 -- Python dictionary and random selection. Select a random person from the dictionary.
 # 2024-09-13
 # time spent: 0.3
 
