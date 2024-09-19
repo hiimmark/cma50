@@ -1,6 +1,6 @@
 '''
 Mark Ma 
-Ghidorah 
+Hot Cheetos 
 SoftDev
 K06 -- Read from csv, populate dictionary, select random occupation with given percentage chance
 2024-09-20
