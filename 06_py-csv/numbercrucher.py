@@ -1,9 +1,18 @@
-# Mark Ma
-# Ghidorah 
-# SoftDev
-# K06 -- Read from csv, populate dictionary, select random occupation with given percentage chance
-# 2024-09-20
-# time spent: 0.3 
+'''
+Mark Ma 
+Ghidorah 
+SoftDev
+K06 -- Read from csv, populate dictionary, select random occupation with given percentage chance
+2024-09-20
+time spent: 0.3 
+
+DISCO: 
+We discovered how to select a random real number from a range using random.uniform and how to parse and read from a csv file.
+QCC:
+Why is the total distribtion only 99.8%?
+HOW THIS SCRIPT WORKS:
+Move occupations.csv in the directory of the script with occupation name and percentage as columns. Call select_random() to choose a random occupation. The chance to select each occupations is weighted based on the percentage in the csv file.
+'''
 
 import random
 
