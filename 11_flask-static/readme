@@ -10,4 +10,5 @@ Predictions:
 - When loading the subdirectory /static, it will run h(). It will display a random number and still print __main__ in terminal.
 
 Observed:
-- We had to load the subdirectory /static/foo.html. It does still print __main__ in terminal
+- We had to load the subdirectory /static/foo.html. It does still print __main__ in terminal.
+- When loading /static or /static/foo it leads to 404 server not found.
