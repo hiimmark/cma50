@@ -1,0 +1,13 @@
+Mark Ma
+Hot Cheetos
+SoftDev
+K11 - Static Pages in Flask
+2024-09-26
+time spent: 0.5
+
+Predictions:
+- When loading the root page, it should still display No Hablo Queso and print __main__ in terminal.
+- When loading the subdirectory /static, it will run h(). It will display a random number and still print __main__ in terminal.
+
+Observed:
+- We had to load the subdirectory /static/foo.html. It does still print __main__ in terminal
