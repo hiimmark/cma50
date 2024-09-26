@@ -8,8 +8,8 @@ time spent: 0.5
 Predictions:
 - When loading the root page, it should still display No Hablo Queso and print __main__ in terminal.
 - Before uncommenting the code in app.py, the text "Is this plaintext, though?"
-  will be displayed since it is what is in the static/foo.html file locally.
-- When loading the subdirectory /static, it will run h(). It will display a random number and still print __main__ in terminal.
+will be displayed since it is what is in the /static/foo.html file locally.
+- After the uncomment, h() will be run. It will display a random number in /static/foo.html and still print __main__ in terminal.
 
 Observed:
 - /static/foo returns a 404 error
