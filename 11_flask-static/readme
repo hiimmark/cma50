@@ -15,5 +15,5 @@ Observed:
 - /static/foo returns a 404 error
 - /static/foo.html displays "Is this plaintext, though?"
 Once uncommented the code from app.py...
-- We had to load the subdirectory /static/foo.html. It does still print __main__ in terminal.
+- When loading /static/foo.html, it does print __main__ in terminal, and display a random number.
 - When loading /static or /static/foo it leads to 404 server not found.
