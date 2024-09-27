@@ -9,6 +9,7 @@ time spent: 0.5
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Q0:
 This will cause an error because render_template is not defined in the test_implt() function since it is not imported.
+We expected that the program wouldn't even run. However, it only presented an error when we tried to load /my_foist_template.
 
 Q1:
 http://localhost:5000/my_foist_template
