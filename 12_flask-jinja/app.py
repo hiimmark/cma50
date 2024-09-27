@@ -23,7 +23,9 @@ When render_template is removed from input, localhost:5000/my_foist_template dis
 erorr message is printed in terminal.
 
 When localhost:5000/my_foist_template is loaded, the title is foooo, and 0 1 1 2 3 5 8 is displayed on
-different lines.
+different lines. It seems to us that our prediction in Q3 is correct. "foooo" is assigned the foo variable
+in the html template file and passed through the render_template function in app.py, and the collections variable
+is assigned the coll array in app.py.
 """
 
 
