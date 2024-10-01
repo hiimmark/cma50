@@ -14,20 +14,24 @@ import csv
 app = Flask(__name__)
 
 d = {}
-def randocc():
-    with open("data/occupations.csv", "r") as file:
-        arr = list(csv.reader(file))[1:-2] #omit first and last lines
-    for i in arr:
-        d.update({i[0]:float(i[1])})
-    d.update({"Ducky":0.2}) #make the total 100%
-    random_occ = random.choices(list(d.keys()), list(d.values()))[0]
-    return random_occ
+
+def select_random():
+    perc = random.uniform(0, 99.8)
+    for key, values in d.items():
+        if perc - values[0] <= 0:
+            return [key, values[1]]
+        perc -= values[0]
+    return "N/A"
 
 @app.route("/wdywtbwygp")
 def load_site():
-    return render_template('tablified.html', rand_occupation = randocc(), table=d)
-
+    return render_template('tablified.html', rand_occupation = select_random(), table=d)
 
 if __name__ == "__main__":
+    with open("data/occupations.csv", "r") as file:
+        arr = list(csv.reader(file))[1:-2] #omit first and last lines
+    for i in arr:
+        d.update({i[0]:[float(i[1]), i[2]]})
+
     app.debug = True
     app.run()
