@@ -1,0 +1,35 @@
+Mark Ma
+Ghidorah
+SoftDev
+K14 - Discovering inputs
+2024-10-07
+time spent: 0.5 
+
+
+DISCO:
+* request.args is an immutable dictionary
+* Accessing username from the request.args dictionary in the home page gives a keyerror
+* request.headers gives all sorts of information of the user and the host, such as user-agent and hostname.
+* 
+-----------------------------------------------------------------------
+
+
+Q/C/C:
+*  
+* 
+* 
+-----------------------------------------------------------------------
+
+
+OTHER?
+* 
+* 
+* 
+-----------------------------------------------------------------------
+
+
+
+
+
+
+
