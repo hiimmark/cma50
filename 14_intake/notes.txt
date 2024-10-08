@@ -10,19 +10,20 @@ DISCO:
 * request.args is an immutable dictionary
 * Accessing username from the request.args dictionary in the home page gives a keyerror
 * request.headers gives all sorts of information of the user and the host, such as user-agent and hostname.
-* 
+* Submitting the form redirects to /auth
+* using functions in testmod0 is automatically defined after imported
 -----------------------------------------------------------------------
 
 
 Q/C/C:
-*  
+* Why do we need to track the request headers?
 * 
 * 
 -----------------------------------------------------------------------
 
 
 OTHER?
-* 
+* In usual websites, the submit button doesnt actually redirect the user to another page. It just sends the form response to the url and redirects the user back.
 * 
 * 
 -----------------------------------------------------------------------
