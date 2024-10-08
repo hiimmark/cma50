@@ -12,12 +12,18 @@ DISCO:
 * request.headers gives all sorts of information of the user and the host, such as user-agent and hostname.
 * Submitting the form redirects to /auth
 * using functions in testmod0 is automatically defined after imported
+* Uncommenting nothing returns two headings and a box for user input with submit next to it (listed as form action="/auth" in login.html)
+* methods=['GET', 'POST'] are meant to be inside app.route
+* Two types of input types in form in HTML: text which allows user to type and submit which user can click for server to receive data
+* Pressing submit sends user to route with /auth that returns the text "Waaaa hooo HAAAH" (name of two inputs and the input in username is also on URL)
+* Uncommenting print(request) prints 'http://localhost:5000/' [GET] (request might be defaulted to GET, which is a method that gets the user's input)
+* request.headers returns information about the user and the host
 -----------------------------------------------------------------------
 
 
 Q/C/C:
 * Why do we need to track the request headers?
-* 
+* What is the purpose of methods=['GET', 'POST']? Judging by the name of the list it is a part of, they could be new methods but there are no refs to it anywhere else?
 * 
 -----------------------------------------------------------------------
 
