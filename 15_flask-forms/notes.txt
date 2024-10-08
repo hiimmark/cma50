@@ -1,0 +1,17 @@
+Mark Ma
+Ghidorah - Mark, Danny, Amanda
+SoftDev
+K15 - Flask Forms
+2024-10-07
+time spent: 0.5
+
+DISCO:
+* When routing the page, the method defaults to "GET" and "POST" must be specified
+* "GET" method can use request.args to get an immutable dictionary called ImmutableMultiDict
+* "POST" method can use request.forms for response pages that can't be accessed normally through a url
+-----------------------------------------------------------------------
+Q/C/C:
+* Are there other request methods different from "GET" and "POST"?
+* Initial Question: Are both the "GET" and "POST" methods implied when the route does not specify them? (Answered in DISCO)
+* What's the secure way to send and recieve user input if both "GET" and "POST" are not secure?
+-----------------------------------------------------------------------
