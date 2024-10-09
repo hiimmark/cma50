@@ -19,9 +19,15 @@ time spent: 0.5 <br>
     </h3>
     <form action="/response", method="POST">
       <input type="text" name="username">
-      <input type="submit" name="sub1", value="login">
+      <input type="submit" name="sub1", value="POST login">
     </form>
     <br>
+
+    <form action="/response", method="GET">
+      <input type="text" name="username">
+      <input type="submit" name="sub1", value="GET login">
+    </form>
+
 
     Request method used: {{method}}
   </body>

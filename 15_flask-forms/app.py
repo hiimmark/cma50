@@ -18,9 +18,14 @@ def disp_loginpage():
     return render_template( 'login.html' , method = request.method)
 
 
-@app.route("/response", methods=['POST']) # , methods=['GET', 'POST'])
+@app.route("/response", methods=['GET', 'POST']) # , methods=['GET', 'POST'])
 def authenticate():
-    return render_template('response.html', username=request.form['username'], method=request.method)
+    user = ""
+    if request.method == "GET":
+        user = request.args['username']
+    else:
+        user = request.form['username']
+    return render_template('response.html', username=user, method=request.method)
 
 
     
