@@ -3,7 +3,7 @@ Mark Ma
 Ghidorah - Mark, Danny, Marco
 SoftDev
 K16 - Cookies and Sessions
-2024-10-07
+2024-10-09
 time spent: 1
 '''
 
@@ -36,7 +36,7 @@ def response_page():
 @app.route("/logout", methods = ['POST'])
 def logout_page():
     # code to logout page and pop session
-    session.pop("username")
+    session.pop("username", None)
     return redirect("/")
 
 if __name__ == "__main__": #false if this file imported as module
