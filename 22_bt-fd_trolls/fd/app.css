@@ -1,0 +1,90 @@
+body{
+        background-color: rgba(229, 236, 241, 0.8);
+        color: white;
+        background-image: url('assets/webfishing_bg.png');
+        background-size: cover;
+        background-repeat: no-repeat;
+        /* background-size: -1; */
+        background-position: center;
+        
+        font-family: 'Courier New', monospace;
+        overflow: hidden;
+}
+
+.sticky-topbar {
+    width: 100%;
+    background-color: white;
+    color: black;
+    font-size: larger;
+}
+.top-bar-left {
+    color: #fc862b;
+}
+
+a {
+    color: #ffb570;
+}
+
+.button{
+  background-color: #ffb570;
+  color: white;
+}
+
+.container{
+    display: flex;
+}
+
+.intro {
+    flex: 1;
+    padding:5%;
+    padding-top: 10%;
+}
+
+.news-card-title {
+    font-family: inherit;
+}
+
+.news-card-article{
+    background-color: #fc862b;
+    padding: 50px;
+    padding-bottom: 200px;
+    border-radius: 20px;
+}
+.news-card-date{
+    font-style: italic;
+    font-size: smaller;
+    padding-bottom: 5px;
+}
+
+.translucent-form-overlay{
+    flex:1;
+    padding:5%;
+    padding-top: 10%;
+}
+
+.scamming {
+    padding: 30px;
+    background-color: rgba(252, 134, 43, 0.8);
+    border-radius: 20px;   
+}
+.input {
+    color:white
+}
+h4 {
+    color: white;
+    font-weight: bold;
+    font-family: inherit;
+}
+.submitbutton {
+    background-color: white;
+    color: #fc862b;
+}
+
+.overlay {
+    z-index: 4;
+    bottom:-150px;
+    right:300px;
+    transform: scale(3.0);
+    position: absolute;
+    filter: drop-shadow(20px 5px 4px black);
+}
