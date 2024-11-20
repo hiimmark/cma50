@@ -1,0 +1,25 @@
+Mark Ma <br>
+Topher - Mark, Tawab <br>
+Softdev <br>
+K23 - Rest API from Nasa <br>
+2024-11-20 <br>
+time spent: 1 <br>
+
+<html>
+
+	<head>
+		<title> IMAGES FROM MARS </title>
+	</head>
+
+	<h1>
+		Nasa Images from Mars (FHAZ camera)
+	</h1>
+
+	<center>
+	{% for image in images %}
+	<h3> {{ image[1] }} </h3> <br>
+	<img src="{{ image[0] }}"> <br>
+	{% endfor %}
+	</center>
+
+</html>

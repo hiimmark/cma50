@@ -1,6 +1,10 @@
 '''
 Mark Ma
-
+Topher - Mark, Tawab
+Softdev
+K23 - Rest API from Nasa
+2024-11-20
+time spent: 1
 '''
 
 from flask import Flask, render_template, request, session, redirect
@@ -12,22 +16,23 @@ app = Flask(__name__)
 
 @app.route('/')
 def render():
-    secret_key = open("key_nasa.txt", "r").read()
-    print(secret_key)
-    url = "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos"
-    values = {
-            'earth_date' : '2022-04-21',
-            'api_key' : secret_key
-            }
-    data = urllib.parse.urlencode(values)
-    data = data.encode('ascii') # data should be bytes
-    req = urllib.request.Request(url, data)
+    secret_key = open("key_nasa.txt", "r").read().strip().rstrip()
+    url = "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=2022-10-31" 
+    url += "&api_key=" + secret_key
+    url += "&camera=fhaz"
+    req = urllib.request.Request(url=url)
 
+    l = []
     with urllib.request.urlopen(req) as response:
-        the_page = response.read()
-        print(the_page)
+        parsed_page = json.loads(response.read())
+        photos = parsed_page['photos']
+        for x in photos:
+            cam = x['camera']
+            name = x['camera']['full_name']
+            image_url = x['img_src']
+            l.append([image_url, name])
     
-    return render_template('main.html')
+    return render_template('main.html', images=l)
 
 if __name__ == "__main__":
     app.run()
