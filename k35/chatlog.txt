@@ -1,0 +1,83 @@
+in k35, fix the error with base.html where the erorr gives 
+                <li><a href="{{ url_for('auth.signup') }}">Sign Up</a></li>
+
+                {% endif %}
+
+            </ul>
+
+        </nav>
+
+        <div class="container">
+
+            {% block content %}
+
+            {% endblock %}
+
+        </div>
+
+    </body>
+
+    </html>
+
+    jinja2.exceptions.TemplateAssertionError: block 'content' defined twice
+10 references
+
+The error in base.html is due to the 'content' block being defined twice. Here's the relevant portion from base.html:
+HTML
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Blog Hosting Site</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('blog.index') }}">Home</a></li>
+            {% if current_user.is_authenticated %}
+            <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
+            <li><a href="{{ url_for('blog.new_blog') }}">Create New Blog</a></li>
+            {% else %}
+            <li><a href="{{ url_for('auth.login') }}">Login</a></li>
+            <li><a href="{{ url_for('auth.signup') }}">Sign Up</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+    <div class="container">
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>
+
+Based on the search results, there are multiple other files that extend base.html and define a 'content' block as well. Here are some of those files:
+
+    home.html
+    entry.html
+    register.html
+    login.html
+
+To fix the error, ensure the 'content' block is only defined once in base.html and remove any duplicate definitions if present. You can view and edit the file directly using the provided search results links.
+the issue has been fixed, now ValueError: Invalid hash method 'sha256'.
+1 reference
+
+The ValueError: Invalid hash method 'sha256' error is occurring in the k35/app/auth.py file:
+Python
+
+from werkzeug.security import generate_password_hash, check_password_hash
+
+...
+
+@auth.route('/signup', methods=['POST'])
+def signup_post():
+    ...
+    hashed_password = generate_password_hash(password, method='sha256')
+    ...
+
+To fix this error, ensure that the generate_password_hash function from werkzeug.security supports the 'sha256' method. If not, use a supported method like 'pbkdf2:sha256'. Here's how you can modify the code:
+Python
+
+hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
+
+You can view and edit the file directly using the provided auth.py link.

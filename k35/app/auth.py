@@ -39,7 +39,7 @@ def signup_post():
         flash('Email address already exists')
         return redirect(url_for('auth.signup'))
     
-    hashed_password = generate_password_hash(password, method='sha256')
+    hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
     execute_db('INSERT INTO users (email, password, name) VALUES (?, ?, ?)', (email, hashed_password, name))
     
     return redirect(url_for('auth.login'))

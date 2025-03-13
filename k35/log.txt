@@ -1,0 +1,5 @@
+AI takes a long time to run
+It works better if you specify a specific repository where there is already some code in there that you want to modify.
+Fixes bugs pretty effectively.
+It gets frustrating if you want it to generate many pieces of code at once because it many results in error such as
+importing errors or importing packages not supported by the machine
