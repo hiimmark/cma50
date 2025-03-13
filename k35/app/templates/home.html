@@ -3,7 +3,7 @@
 <h1>All Blogs</h1>
 <ul>
     {% for blog in blogs %}
-    <li><a href="{{ url_for('blog.blog_view', blog_id=blog.id) }}">{{ blog.title }}</a> by {{ blog.user.name }}</li>
+    <li><a href="{{ url_for('blog.blog_view', blog_id=blog.id) }}">{{ blog.title }}</a> by {{ blog.user_id }}</li>
     {% endfor %}
 </ul>
 {% endblock %}

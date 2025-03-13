@@ -8,7 +8,7 @@
     <nav>
         <ul>
             <li><a href="{{ url_for('blog.index') }}">Home</a></li>
-            {% if current_user.is_authenticated %}
+            {% if session['user_id'] %}
             <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
             <li><a href="{{ url_for('blog.new_blog') }}">Create New Blog</a></li>
             {% else %}
