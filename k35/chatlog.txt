@@ -81,3 +81,179 @@ Python
 hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
 
 You can view and edit the file directly using the provided auth.py link.
+
+just rewrite entire blog.py and blog_view.html at this point. make sure it is compatible with the other linked files
+8 references
+
+Based on the analysis and changes retrieved, here are the updated blog.py and blog_view.html to ensure compatibility and resolve the current_user issue:
+blog.py
+Python
+
+from flask import Blueprint, render_template, redirect, url_for, request, session
+from database import query_db, execute_db
+
+# Custom function to get the current user
+def get_current_user():
+    if 'user_id' in session:
+        user = query_db('SELECT * FROM users WHERE id = ?', [session['user_id']], one=True)
+        return user
+    return None
+
+blog = Blueprint('blog', __name__)
+
+@blog.route('/')
+def index():
+    blogs = query_db('SELECT * FROM blogs')
+    current_user = get_current_user() # Add current_user to context
+    return render_template('home.html', blogs=blogs, current_user=current_user)
+
+@blog.route('/new_blog')
+def new_blog():
+    if 'user_id' not in session:
+        return redirect(url_for('auth.login'))
+    current_user = get_current_user()
+    return render_template('new_blog.html', current_user=current_user)
+
+@blog.route('/new_blog', methods=['POST'])
+def new_blog_post():
+    if 'user_id' not in session:
+        return redirect(url_for('auth.login'))
+    
+    title = request.form.get('title')
+    user_id = session['user_id']
+    
+    execute_db('INSERT INTO blogs (title, user_id) VALUES (?, ?)', (title, user_id))
+    
+    return redirect(url_for('blog.index'))
+
+@blog.route('/blog/<int:blog_id>')
+def blog_view(blog_id):
+    blog = query_db('SELECT * FROM blogs WHERE id = ?', [blog_id], one=True)
+    entries = query_db('SELECT * FROM entries WHERE blog_id = ?', [blog_id])
+    current_user = get_current_user()
+    return render_template('blog_view.html', blog=blog, entries=entries, current_user=current_user)
+
+@blog.route('/blog/<int:blog_id>/new_entry')
+def new_entry(blog_id):
+    if 'user_id' not in session:
+        return redirect(url_for('auth.login'))
+    current_user = get_current_user()
+    return render_template('entry.html', blog_id=blog_id, current_user=current_user)
+
+@blog.route('/blog/<int:blog_id>/new_entry', methods=['POST'])
+def new_entry_post(blog_id):
+    if 'user_id' not in session:
+        return redirect(url_for('auth.login'))
+    
+    title = request.form.get('title')
+    content = request.form.get('content')
+    
+    execute_db('INSERT INTO entries (title, content, blog_id) VALUES (?, ?, ?)', (title, content, blog_id))
+    
+    return redirect(url_for('blog.blog_view', blog_id=blog_id))
+
+@blog.route('/blog/<int:blog_id>/edit/<int:entry_id>')
+def edit_entry(blog_id, entry_id):
+    if 'user_id' not in session:
+        return redirect(url_for('auth.login'))
+    
+    entry = query_db('SELECT * FROM entries WHERE id = ? AND blog_id = ?', (entry_id, blog_id), one=True)
+    if entry is None:
+        return redirect(url_for('blog.blog_view', blog_id=blog_id))
+    
+    current_user = get_current_user()
+    return render_template('blog_edit.html', entry=entry, current_user=current_user)
+
+@blog.route('/blog/<int:blog_id>/edit/<int:entry_id>', methods=['POST'])
+def edit_entry_post(blog_id, entry_id):
+    if 'user_id' not in session:
+        return redirect(url_for('auth.login'))
+    
+    title = request.form.get('title')
+    content = request.form.get('content')
+    
+    execute_db('UPDATE entries SET title = ?, content = ? WHERE id = ? AND blog_id = ?', (title, content, entry_id, blog_id))
+    
+    return redirect(url_for('blog.blog_view', blog_id=blog_id))
+
+blog_view.html
+HTML
+
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ blog.title }}</h1>
+<h2>Entries</h2>
+<ul>
+    {% for entry in entries %}
+    <li><a href="{{ url_for('blog.blog_view', blog_id=blog.id) }}">{{ entry.title }}</a></li>
+    {% endfor %}
+</ul>
+{% if current_user and current_user.is_authenticated %}
+<a href="{{ url_for('blog.new_entry', blog_id=blog.id) }}">Add New Entry</a>
+{% endif %}
+{% endblock %}
+
+This will ensure that current_user is passed to the templates and will be checked for authentication status. Adjustments have been made to both blog.py and blog_view.html to integrate current_user consistently.
+
+Below are two updates you can make:
+
+    Update the blog view route so that it passes the current user (using a helper function such as get_current_user) to the template. This ensures that the condition in the template checking for a logged-in user returns true.
+
+    Confirm that the HTML for the button is correct.
+
+Below are the updated code examples.
+
+And update your blog view template to use a button element with an onclick event:
+
+With these updates, the blog view now passes the current user to the template so that the "Add New Entry" button appears, and clicking it will navigate to the new entry form.
+
+Test these changes to verify that:
+
+    You're logged in.
+    The "Add New Entry" button displays.
+    Clicking the button redirects you to the new entry page.
+
+Let me know if you need any further assistance!
+jinja2.exceptions.TemplateNotFound: create_blog.html
+
+It seems that the create_blog.html template is missing from your templates directory. To resolve this error, you'll need to create the create_blog.html file in your templates folder. Below is an example of what the create_blog.html file might look like:
+
+Make sure to place this file in the correct templates directory so Flask can find it. After adding this file, restart your application and the error should be resolved.
+how to create an entry?
+
+Below is an explanation of the entry creation process along with the related code in your repository:
+
+    Your application uses Flask and the blueprint "blog" in blog.py to handle entries. There are two main routes for creating an entry:
+
+        A GET route that displays the form:
+            URL: /blog/<blog_id>/new_entry
+            This route checks if the user is logged in (via session) and then renders the entry creation form (entry.html).
+
+        A POST route that handles the form submission:
+            URL: /blog/<blog_id>/new_entry
+            This route processes the form data (title and content) and inserts a new record into the entries table, associating it with the correct blog.
+
+    In the template entry.html you provide text input for the title and a textarea for the content. When the form is submitted, it sends the data to the POST route for new entries.
+
+Below are file examples for both the Python route and the HTML template.
+
+To create an entry:
+
+    Make sure you are logged in so that session["user_id"] is set.
+    Navigate to a specific blog page and click the "Add New Entry" button (which should direct you to /blog/<blog_id>/new_entry).
+    Fill out the form in entry.html.
+    Submit the form, which will trigger the new_entry_post route to save your entry.
+
+Following this flow should let you successfully create an entry.
+make a button where you can add an entry to the blog plz
+
+Below is an updated version of your blog view template that adds a clickable button to create a new entry for the blog. The button uses an onclick event to redirect to the new entry form for that specific blog.
+
+Make sure that in your blog routes (in blog.py) you have the corresponding route for creating a new entry:
+
+With this update, the "Add New Entry" button in your blog view should be clickable and will redirect users to the page where they can fill out the entry form.
+the content of the entry isnt viewable on page\
+
+Below is an updated version of your blog view template which displays both the title and content for each entry. This should ensure that the content is viewable on the page.
+
+In this version, each entry is rendered with its title in an h3 and its content inside a paragraph tag. This should make the entry content visible on your blog view page.
