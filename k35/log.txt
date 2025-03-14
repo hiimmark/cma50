@@ -1,5 +1,19 @@
+Team DD :: Mark Ma, Michelle Zhu
+SoftDev pd5
+K34 -- Copilot Tomfoolery
+Time Spent: 2
+2025-03-14
+
+DISCO:
 AI takes a long time to run
 It works better if you specify a specific repository where there is already some code in there that you want to modify.
 Fixes bugs pretty effectively.
 It gets frustrating if you want it to generate many pieces of code at once because it many results in error such as
 importing errors or importing packages not supported by the machine
+can take multiple prompting for the AI to understand you
+
+Q/C/C:
+q0: Multiple trials. To fix a specific error, anywhere from 1-6.
+q1: Yes, it doesn't know how to properly import other files in the directory. It's probably unaware of how the directory is structured, so it's probably not at fault.
+q2: The bot definitely writes cleaner code. I'm not sure if it debugs very effectively though, and it can sometimes get frustrating to get it to fix a trivial error. I'm really satisfied with the end product though. I think it's more productive than lazy senioritis-infected devoq1: Yes, it doesn't know how to properly import other files in the directory. It's probably unaware of how the directory is structured, so it's probably not at fault.
+q2: The bot definitely writes cleaner code. I'm not sure if it debugs very effectively though, and it can sometimes get frustrating to get it to fix a trivial error. I'm really satisfied with the end product though. I think it's more productive than lazy senioritis-infected devos.

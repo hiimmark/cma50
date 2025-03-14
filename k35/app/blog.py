@@ -1,19 +1,15 @@
 from flask import Blueprint, render_template, redirect, url_for, request, session
 from database import query_db, execute_db
 
-# Add helper function for getting the current user if not defined already.
-def get_current_user():
-    if 'user_id' in session:
-        return query_db('SELECT * FROM users WHERE id = ?', [session['user_id']], one=True)
-    return None
-
 blog = Blueprint('blog', __name__)
 
 @blog.route('/')
 def index():
-    blogs = query_db('SELECT * FROM blogs')
-    current_user = get_current_user()
-    return render_template('home.html', blogs=blogs, current_user=current_user)
+    # Perform a join to get the user's name along with each blog.
+    blogs = query_db(
+        'SELECT blogs.*, users.name AS username FROM blogs JOIN users ON blogs.user_id = users.id'
+    )
+    return render_template('home.html', blogs=blogs)
 
 @blog.route('/new_blog')
 def new_blog():
@@ -35,10 +31,14 @@ def new_blog_post():
 
 @blog.route('/blog/<int:blog_id>')
 def blog_view(blog_id):
-    blog_item = query_db('SELECT * FROM blogs WHERE id = ?', [blog_id], one=True)
+    # Retrieve the blog details along with the user's name.
+    blog_item = query_db(
+        'SELECT blogs.*, users.name AS username FROM blogs JOIN users ON blogs.user_id = users.id WHERE blogs.id = ?',
+        [blog_id],
+        one=True
+    )
     entries = query_db('SELECT * FROM entries WHERE blog_id = ?', [blog_id])
-    current_user = get_current_user()
-    return render_template('blog_view.html', blog=blog_item, entries=entries, current_user=current_user)
+    return render_template('blog_view.html', blog=blog_item, entries=entries)
 
 @blog.route('/blog/<int:blog_id>/new_entry')
 def new_entry(blog_id):
