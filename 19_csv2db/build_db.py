@@ -21,11 +21,11 @@ students_info = csv.DictReader(open("students.csv"))
 
 c.execute("CREATE TABLE students (name TEXT, age INTEGER, id INTEGER);")
 for x in students_info:
-    print(x)
+    # print(x)
     c.execute(f'INSERT INTO students  VALUES (\'{x["name"]}\', {int(x["age"])}, {int(x["id"])});') #Put quotes around string variable so db recognizes it as a data value rather than a column name
 c.execute("CREATE TABLE courses (name TEXT, mark INTEGER, id INTEGER);")
 for y in courses_info:
-    print(y)
+    # print(y)
     c.execute(f'INSERT INTO courses VALUES (\'{y["code"]}\', {int(y["mark"])}, {int(y["id"])});')
 
 
